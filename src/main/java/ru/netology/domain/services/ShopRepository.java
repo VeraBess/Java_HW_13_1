@@ -21,12 +21,17 @@ public class ShopRepository {
     }
 
     /**
+     * !!!!!!!!!!!!!!!
      * Метод добавления товара в репозиторий
      *
      * @param product — добавляемый товар
      */
-    public void add(Product product) {
-        products = addToArray(products, product);
+    public void add(Product product) {//метод добавления нового товара в репо. Метод с проверкой на существование продукта
+        if (findById(product.getId()) == product) {
+            throw new AlreadyExistsException("Продукт уже существует");
+        } else {
+            products = addToArray(products, product);
+        }
     }
 
     public Product[] findAll() {
